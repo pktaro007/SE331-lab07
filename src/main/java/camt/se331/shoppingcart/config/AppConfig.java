@@ -1,13 +1,18 @@
 package camt.se331.shoppingcart.config;
-  
 
+
+import camt.se331.shoppingcart.entity.SerializableResourceBundleMessageSource;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
+
+import java.util.Locale;
 
 @EnableWebMvc
 @Configuration 
@@ -31,7 +36,32 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         resolver.setPrefix("/views/");  
         resolver.setSuffix(".jsp");  
         resolver.setViewClass(JstlView.class);  
-        return resolver;  
+        return resolver;
+    }
+
+    //The localization here
+    @Bean
+    public LocaleResolver localeResolver(){
+        final SessionLocaleResolver ret = new SessionLocaleResolver();
+        ret.setDefaultLocale(new Locale("en"));
+        return ret;
+    }
+    @Bean
+    public MessageSource messageSource(){
+        final SerializableResourceBundleMessageSource ret = new SerializableResourceBundleMessageSource();
+        ret.setBasename("classpath:message");
+        ret.setDefaultEncoding("UTF-8");
+        return ret;
+    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+        registry.addInterceptor(localeChangeInterceptor());
+    }
+    @Bean
+    public HandlerInterceptor localeChangeInterceptor(){
+        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("lang");
+        return localeChangeInterceptor;
     }
 
 }
