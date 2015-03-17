@@ -30,7 +30,7 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
