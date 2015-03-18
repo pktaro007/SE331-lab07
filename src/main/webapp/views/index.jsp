@@ -42,6 +42,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-class="{'active':currentLocale=='en'}"><a href="" ng-click="changeLanguage('en')">EN</a></li>
                     <li ng-class="{'active':currentLocale=='fr'}"><a href="" ng-click="changeLanguage('fr')">FR</a></li>
+                    <li ng-class="{'active':currentLocale=='sp'}"><a href="" ng-click="changeLanguage('sp')">SP</a></li>
                 </ul>
             </div>
         </div>
