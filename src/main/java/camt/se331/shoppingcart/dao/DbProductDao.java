@@ -20,7 +20,7 @@ public class DbProductDao implements ProductDao{
 
     @Override
     public List<Product> getProducts() {
-        return null;
+        return productRepository.findAll();
     }
 
     @Override
@@ -30,21 +30,23 @@ public class DbProductDao implements ProductDao{
 
     @Override
     public Product getProduct(Long id) {
-        return null;
+        return productRepository.findOne(id);
     }
 
     @Override
     public Product addProduct(Product product) {
-        return null;
+        return productRepository.save(product);
     }
 
     @Override
     public Product deleteProduct(Product product) {
-        return null;
+        productRepository.delete(product);
+        product.setId(null);
+        return product;
     }
 
     @Override
     public Product updateProduct(Product product) {
-        return null;
+        return productRepository.save(product);
     }
 }
