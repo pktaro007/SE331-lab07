@@ -11,11 +11,10 @@ var labApp = angular.module('labApp', [
 labApp.config(['$routeProvider',
   function($routeProvider) {
   $routeProvider.
-      when('/addProduct',{
-          templateUrl: 'template/editProduct.html',
-          controller: 'addProductController'
+      when('/home',{
+          templateUrl: 'template/a.html'
       }).
-      when('/editProduct/:id',{
+      when('/history',{
           templateUrl: 'template/editProduct.html',
           controller: 'editProductController'
       }).
@@ -23,7 +22,7 @@ labApp.config(['$routeProvider',
           templateUrl: 'template/productList.html',
           controller: 'listProductController'
       }).
-       otherwise({redirectTo: '/listProduct'});
+       otherwise({redirectTo: '/home'});
 }]);
 
 labApp.config(function($translateProvider){
